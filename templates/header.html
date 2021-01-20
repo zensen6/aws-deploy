@@ -1,0 +1,9 @@
+<div>
+    {% if user.is_authenticated %}
+        <li><a href="{% url "gallery:logout" %}">logout</a></li>
+    {% else %}
+        <li><a href="{% url "gallery:login" %}">login</a></li>
+    {% endif %}
+</div>
+{%  block content %}
+{% endblock %}

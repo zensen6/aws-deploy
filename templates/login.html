@@ -1,0 +1,8 @@
+{% extends "galleries/gallery_list.html" %}
+{% block content %}
+    <form method="POST" action="{%url 'gallery:login'%}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>submit</button>
+    </form>
+{% endblock %}

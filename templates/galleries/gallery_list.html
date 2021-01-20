@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    {% extends "header.html" %}
+    {% block content %}
+        <div style="display:flex; flex-direction:row;">
+            {% for g in page %}
+                <span>{{g.name}}</span>
+                <a href='{% url "gallery:detail" g.pk%}'><div style="background-image: url({{g.get_photos}}); width: 100px; height: 100px;">ads</div></a>
+            {% endfor %}
+            {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}">previous</a>
+            {% endif %}
+            page{{page_obj.number}}
+            {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}">next</a>
+            {% endif %}
+            {{potato}}
+        </div>
+    {% endblock %}
+    
+    {% block detail %}
+    {% endblock %}
+</body>
+</html>

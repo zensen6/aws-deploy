@@ -1,0 +1,15 @@
+{% extends "galleries/gallery_list.html" %}
+{% block content %}
+
+<form method="get" action="{% url 'gallery:search' %}">
+    {{form.as_p}}
+    <button>Submit</button>
+</form>
+
+{% for g in galleries %}
+    {{g.name}}
+{% endfor %}
+{% endblock %}
+
+
+
