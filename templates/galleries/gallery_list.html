@@ -9,7 +9,7 @@
 <body>
     {% extends "header.html" %}
     {% block content %}
-        <div style="display:flex; flex-direction:row;">
+        <div>
             {% for g in page %}
                 <span>{{g.name}}</span>
                 <a href='{% url "gallery:detail" g.pk%}'><div style="background-image: url({{g.get_photos}}); width: 100px; height: 100px;">ads</div></a>
