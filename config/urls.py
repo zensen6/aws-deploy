@@ -21,7 +21,6 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("core.urls", namespace="home")),
-    path('gallery/', include("galleries.urls", namespace="gallery")),
 ]
 
 if settings.DEBUG:
