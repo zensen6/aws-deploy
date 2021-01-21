@@ -9,6 +9,9 @@ verify_ssl = true
 django = "==3.1.4"
 pillow = "*"
 django-seed = "*"
+requests = "*"
+beutifulsoup = "*"
+bs4 = "*"
 
 [requires]
 python_version = "3.7"

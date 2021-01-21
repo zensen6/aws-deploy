@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" style="display:flex;
+justify-content: center;
+align-items: center; width:100%; height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "main.css" %}">
+</head>
+<body style="width:100%; height:100%; justify-content:center; align-items:center;background-color:azure;display:flex;
+flex-direction: column;">
+
+    <div style="display:flex;
+    justify-content: center;
+    align-items: center; height:10%;width:100%;"></div>
+    <div style="display:flex;flex-wrap: wrap; 
+    justify-content: center;
+    align-items: center; height:10%;width:100%;">
+        {% for num in container %}
+            <div style="width:50px; height:50px; display:flex;flex-wrap: wrap; 
+            justify-content: center;
+            align-items: center; border-radius:50%;background: rgb(240,252,255);
+background: linear-gradient(90deg, rgba(240,252,255,1) 2%, rgba(154,227,247,1) 37%, rgba(0,170,255,1) 100%, rgba(0,154,245,0.31842105263157894) 100%);
+">{{num}}   </div>
+        {% endfor %}
+        {% for num in bonus %}
+            <div style="width:50px; height:50px; display:flex;flex-wrap: wrap; 
+            justify-content: center;
+            align-items: center; background: rgb(250,241,241);border-radius:50%;
+background: linear-gradient(90deg, rgba(250,241,241,1) 2%, rgba(247,154,219,1) 37%, rgba(255,0,165,1) 100%, rgba(255,10,130,0.31842105263157894) 100%);">{{num}}   </div>
+        {% endfor %}
+    </div>
+
+    <div style="display:flex;
+    justify-content: center;
+    align-items: center; height:5%;width:100%;">
+        {% if done is False %}
+            <span style="color:cornflowerblue;">insert lottery numbers below</span>
+        {% endif %}
+        {% if done is None %}
+            <span style="color:crimson;">You have inserted invalid numbers</span>
+        {% endif %}
+        {% if done is True %}
+            {% if count < 3 %}
+                <span style="color:crimson;">You have wasted your money</span>
+            {% elif count == 3 %}
+                <span style="color:crimson;">You have placed on the 5th place</span>
+            {% elif count == 4 %}
+                <span style="color:crimson;">You have placed on the 4th place</span>
+            {% elif count == 5 %}
+                <span style="color:crimson;">You have placed on the 3rd place</span>
+            {% elif count == 6 %}
+                {% if isbonus == True %}
+                    <span style="color:crimson;">You have placed on the 2nd place</span>
+                {% else %}
+                    <span style="color:crimson;">You have placed on the 1st place</span>
+                {% endif %}
+            {% endif %}
+
+
+        {% endif %}
+    </div>
+    
+    <div style="display:flex;
+    justify-content: center;width:350px;height:40px;
+    align-items: center; background-color:coral;">
+        <div style="height:30%">
+            <form method="POST" action='{%url "home:lottery" %}'>
+                {% csrf_token %}
+                <label for="num1"></label>
+                    {{form.num1}}
+                <label for="num2"></label>
+                    {{form.num2}}
+                <label for="num3"></label>
+                    {{form.num3}}
+                <label for="num4"></label>
+                    {{form.num4}}
+                <label for="num5"></label>
+                    {{form.num5}}
+                <label for="num6"></label>
+                    {{form.num6}}
+                <button>submit</button>
+            </form>
+        </div>        
+    </div>
+    <div style="display:flex;
+    justify-content: center;
+    align-items: center; height:20%"></div>
+    <div style="display:flex;
+    justify-content: center;
+    align-items: center; height:20%"></div>
+    
+    
+    
+</body>
+</html>
