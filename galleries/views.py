@@ -12,17 +12,6 @@ from django.urls import reverse
 # Create your views here.
 
 
-class HomeView(ListView):
-
-    model = gallery
-    context_object_name = "page"
-    paginate_by = 3
-
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
-        context['potato'] = "potato" 
-        return context
-
 '''
 def gallery_detail(request, pk):
 
@@ -34,10 +23,6 @@ def gallery_detail(request, pk):
 
 '''
 
-class GalleryView(DetailView):
-
-    model = gallery
-    context_object_name = 'a'
 
 def SearchView(request):
 

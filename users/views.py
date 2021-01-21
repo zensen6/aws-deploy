@@ -42,9 +42,9 @@ class InputLottery(View):
                     c+=1
                     if form.cleaned_data.get(f"num{i}") == list(container+bonus)[6]:
                         isbonus = True
-            return render(request,"lottery.html", context={'form':form, "container":container, "bonus":bonus,"done":True, "count":c,"eight":8, "isbonus":isbonus})
+            return render(request,"galleries/gallery_list.html", context={'form':form, "container":container, "bonus":bonus,"done":True, "count":c,"eight":8, "isbonus":isbonus})
 
-        return render(request,"lottery.html", context={'form':form, "done":None})
+        return render(request,"galleries/gallery_list.html", context={'form':form, "done":None})
     def get(self, request):
         form = forms.InputForm()
-        return render(request,"lottery.html", context={'form':form, "done":False})
+        return render(request,"galleries/gallery_list.html", context={'form':form, "done":False})
