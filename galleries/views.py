@@ -22,11 +22,11 @@ def gallery_detail(request, pk):
     return render(request, "galleries/detail.html" ,context={"gallery_pk": gallery_pk})
 
 '''
-
+'''
 
 def SearchView(request):
 
-    '''
+    
     galtype = request.GET.get("gallery_type")
     print(galtype)
     galleries = gallery.objects.all()
@@ -34,7 +34,7 @@ def SearchView(request):
     filter_args["gallery_type__name__exact"] = galtype
     galleries = gallery.objects.filter(**filter_args)
     return render(request, "search.html", context={"gal":galleries})
-    '''
+    
 
     name = request.GET.get("name")
     if name is None:
@@ -55,7 +55,7 @@ def SearchView(request):
             return render(request, "search.html", context = {"form":form, "galleries":galleries})
 
     return render(request, "search.html", context = {"form":form})
-
+'''
 
 class LoginView(View):
 
