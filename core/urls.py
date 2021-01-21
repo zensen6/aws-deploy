@@ -4,5 +4,5 @@ app_name = "core"
 
 
 urlpatterns = [
-    path("", InputLottery.as_view(), name="lottery"),
+    path("/", InputLottery.as_view(), name="lottery"),
 ]

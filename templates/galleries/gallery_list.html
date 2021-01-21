@@ -63,6 +63,33 @@ background: linear-gradient(90deg, rgba(250,241,241,1) 2%, rgba(247,154,219,1) 3
 
         {% endif %}
     </div>
- 
+     <div style="display:flex;
+    justify-content: center;width:350px;height:40px;
+    align-items: center; background-color:coral;">
+        <div style="height:30%">
+            <form method="POST" action='{%url "home:lottery" %}'>
+                {% csrf_token %}
+                <label for="num1"></label>
+                    {{form.num1}}
+                <label for="num2"></label>
+                    {{form.num2}}
+                <label for="num3"></label>
+                    {{form.num3}}
+                <label for="num4"></label>
+                    {{form.num4}}
+                <label for="num5"></label>
+                    {{form.num5}}
+                <label for="num6"></label>
+                    {{form.num6}}
+                <button>submit</button>
+            </form>
+        </div>        
+    </div>
+    <div style="display:flex;
+    justify-content: center;
+    align-items: center; height:20%"></div>
+    <div style="display:flex;
+    justify-content: center;
+    align-items: center; height:20%"></div>
 </body>
 </html>
