@@ -4,5 +4,5 @@ app_name = "core"
 
 
 urlpatterns = [
-    path("", InputLottery.as_view(), name="gallery"),
+    path('gallery/', InputLottery.as_view(), name="gallery"),
 ]
