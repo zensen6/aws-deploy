@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . import forms
 from django.views import View
+from django.views.generic import FormView
 import requests
+from django.urls import reverse_lazy, reverse
+from django.contrib.auth import authenticate, login, logout
 from bs4 import BeautifulSoup
 
 # Create your views here.
@@ -48,3 +51,36 @@ class InputLottery(View):
     def get(self, request):
         form = forms.InputForm()
         return render(request,"galleries/gallery_list.html", context={'form':form, "done":False})
+
+
+class LoginView(FormView):
+
+    template_name = "galleries/login.html"
+    form_class = forms.LoginForm
+    success_url = reverse_lazy("home:gallery")
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        user = authenticate(self.request, username=email,password = password)
+        if user is not None:
+            login(self.request, user)
+        return super().form_valid(form)
+
+def log_out(request):
+    logout(request)
+    return redirect(reverse("home:gallery"))
+
+class SignUpView(FormView):
+    template_name = "galleries/signup.html"
+    form_class = forms.SignUpForm
+    success_url = reverse_lazy("home:gallery")
+
+    def form_valid(self,form):
+        form.save()
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        user = authenticate(self.request, username=email,password = password)
+        if user is not None:
+            login(self.request, user)
+        return super().form_valid(form)

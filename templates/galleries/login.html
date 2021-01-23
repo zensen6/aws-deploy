@@ -1,0 +1,11 @@
+{% extends "galleries/base.html" %}
+
+{% block content %}
+<div class="login_box">
+    <form method="POST" action='{% url "home:login" %}'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>Log in</button>
+    </form>
+<div>
+{% endblock %}

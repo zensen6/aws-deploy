@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html style="width:100%; height:100%; justify-content:center; align-items:center;background-color:azure;display:flex;
+flex-direction: column;"lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lottery</title>
+    <style type="text/css">
+        /* link - 아직 클릭하지 않은 경우 red 색상 설정 */
+        a:link { color: green; text-decoration: none;}	
+        /* visited - 한번 클릭하거나 전에 클릭한적 있을 경우 #c71d44 설정 */
+        a:visited { color: white; text-decoration: none;}	
+        /* hover - 마우스를 해당 링크에 위치했을 경우 #006DD7 설정 */
+        a:hover { color: #006DD7; text-decoration: none;}
+
+        div{
+            display:flex;
+            align-items: center;
+        }
+        .little_box{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            margin-right:2%;
+        }
+        .login_box{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
+            height: 50%;
+        }
+        .gallery_topbox{
+            display:flex;
+            justify-content: center;
+            align-items: center; height:10%;width:100%;
+        }
+        .ball{
+            width:50px; height:50px; display:flex;flex-wrap: wrap; 
+            justify-content: center;
+            align-items: center; border-radius:50%;
+        }
+        .blue{
+            background: rgb(240,252,255);
+            background: linear-gradient(90deg, rgba(240,252,255,1) 2%, rgba(154,227,247,1) 37%, rgba(0,170,255,1) 100%, rgba(0,154,245,0.31842105263157894) 100%);
+        }
+        .red{
+            background: rgb(250,241,241);
+            background: linear-gradient(90deg, rgba(250,241,241,1) 2%, rgba(247,154,219,1) 37%, rgba(255,0,165,1) 100%, rgba(255,10,130,0.31842105263157894) 100%);
+        }
+        .message span{
+            animation: fifo 2s forwards;
+        }
+        .fail{
+            color:rgb(168, 22, 112);
+        }
+        .success{
+            color:chartreuse;
+        }
+        @keyframes fifo{
+            0%{
+                opacity:0;
+            }
+            25%{
+                opacity:1;
+            }
+            75%{
+                opacity:1;
+            }
+            100%{
+                opacity:0;
+            }
+        }
+    </style>
+</head>
+<body style="width:100%; height:100%;  align-items:center;background-color:azure;display:flex;
+flex-direction: column; margin-top: 0px; padding-top:0px;">
+    {% include "galleries/header.html" %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

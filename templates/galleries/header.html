@@ -1,0 +1,23 @@
+{% block content %}
+    <div style="display:flex;align-items:center;width:100%;height:15%;background-color:rgb(11, 75, 51); margin-top:0px; padding-left:15%;">
+        <span><h2 style="color:White;">Check your Lottery number</h1></span>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:flex-end;width:100%;height:10%;background-color:rgb(69, 184, 139); margin-top:0px; padding-right:10%">
+        {% if user.is_authenticated %}
+            <div>
+                <span><h3 style="color:White;"><a href="{% url "home:logout" %}">log out</a></h3></span>
+            </div>
+        {% else %}
+            <div class="little_box">
+                <span><h3 style="color:White;"><a href="{% url "home:login" %}">log in</a></h3></span>
+            </div>
+            <div class="little_box">
+                <span><h3 style="color:White;"><a href="{% url 'home:signup' %}">sign up</a></h3></span>
+            </div>
+            <div class="little_box;">
+                <span><h3 style="color:White;"><a href="{% url 'home:gallery' %}">home</a></h3></span>
+            </div>
+            
+        {% endif %}
+    </div>
+{% endblock %}
