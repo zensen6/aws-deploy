@@ -63,7 +63,7 @@
   box-shadow: 15px 18px 41px -2px rgba(0, 0, 0, 0.66);
   border-radius: 40px;">
             <div style="height:30%">
-                <form method="POST" action="{% url "home:gallery" %}">
+                <form class="ballinput" method="POST" action="{% url "home:gallery" %}">
                     {% csrf_token %}
                     <label for="num1"></label>
                         {{form.num1}}
