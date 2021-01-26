@@ -23,25 +23,25 @@
         justify-content: center;
         align-items: center; height:5%;width:100%;">
             {% if done is False %}
-                <span style="color:cornflowerblue;">Insert lottery numbers below</span>
+                <span class = "message_one" style="color:cornflowerblue;">Insert lottery numbers below</span>
             {% endif %}
             {% if done is None %}
-                <span style="color:crimson;">You have inserted invalid numbers</span>
+                <span class = "message_one" style="color:crimson;">You have inserted invalid numbers</span>
             {% endif %}
             {% if done is True %}
                 {% if count < 3 %}
-                    <span style="color:crimson;">You have wasted your money</span>
+                    <span class = "message_one" style="color:crimson;">You have wasted your money</span>
                 {% elif count == 3 %}
-                    <span style="color:crimson;">You have placed on the 5th place</span>
+                    <span class = "message_one" style="color:crimson;">You have placed on the 5th place</span>
                 {% elif count == 4 %}
-                    <span style="color:crimson;">You have placed on the 4th place</span>
+                    <span class = "message_one" style="color:crimson;">You have placed on the 4th place</span>
                 {% elif count == 5 %}
-                    <span style="color:crimson;">You have placed on the 3rd place</span>
+                    <span class = "message_one" style="color:crimson;">You have placed on the 3rd place</span>
                 {% elif count == 6 %}
                     {% if isbonus == True %}
-                        <span style="color:crimson;">You have placed on the 2nd place</span>
+                        <span class = "message_one" style="color:crimson;">You have placed on the 2nd place</span>
                     {% else %}
-                        <span style="color:crimson;">You have placed on the 1st place</span>
+                        <span class = "message_one" style="color:crimson;">You have placed on the 1st place</span>
                     {% endif %}
                 {% endif %}
 
@@ -54,7 +54,7 @@
 
         -->
         <div style="display:flex;
-        justify-content: center;width:70%;height:6%;
+        justify-content: center;width:75%;height:6%;
         align-items: center; display: flex;
 
         background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
@@ -81,10 +81,12 @@
                 </form>
             </div>        
         </div>
-        <div style="display:flex;
-        justify-content: center;
-        align-items: center; height:20%"></div>
-        <div style="display:flex;
-        justify-content: center;
-        align-items: center; height:20%"></div>
+        <div class="bottombox"></div>
+        <div class="bottombox">
+            {% if user.is_authenticated %}
+                {% if done is True %}
+                    <h3> <span style="color:coral">{{expected}} won is expected to win the lottery</span></h1>
+                {% endif %}
+            {% endif %}
+        </div>
     {% endblock %}
