@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
 from . import forms
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView
 import requests
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login, logout
 from bs4 import BeautifulSoup
-
+from django.core.paginator import Paginator
+from math import ceil
 # Create your views here.
 cbox = []
 lotto = []
+bonus_ = []
+numth = []
 '''
     if form.is_valid():
         return render(request,"lottery.html",context={
@@ -27,6 +30,8 @@ class InputLottery(View):
     def l_num(self, page_num):
         global lotto
         global cbox
+        global bonus_
+        global numth
         try:
             url = requests.get(f"https://kr.lottolyzer.com/history/south-korea/6_slash_45-lotto/page/{page_num}/per-page/50/summary-view")
         except Exception:
@@ -38,7 +43,9 @@ class InputLottery(View):
             return 0
         last_num = last_num_table[len(last_num_table)-1].find("td").text
         for i in range(int(last_num), int(first_num)+1):
-            cbox.append(list(map(lambda x:int(x.strip()),last_num_table[i-int(last_num)].findAll("td",{"class":"sum-p1"})[1].text.split(','))))
+            #numth.append(int(first_num) - (i-int(last_num)))
+            #bonus_.append(last_num_table[i-int(last_num)].findAll("td",{"class":"sum-p1"})[2].text.split())
+            cbox.append(list(map(lambda x:int(x.strip()),last_num_table[i-int(last_num)].findAll("td",{"class":"sum-p1"})[1].text.split(',')))  + [int(last_num_table[i-int(last_num)].findAll("td",{"class":"sum-p1"})[2].text.split()[0])] +[int(first_num) - (i-int(last_num))])
     
         return int(last_num)
 
@@ -58,7 +65,7 @@ class InputLottery(View):
             for num in range(1,46):
                 c = 0
                 for i in range(size):
-                    if num in cbox[i]:
+                    if num in cbox[i][:6]:
                         c+=1
                 lotto[num] = (c/size)
             return lotto
@@ -93,7 +100,7 @@ class InputLottery(View):
             num5 = int(form.cleaned_data.get(f"num5"))
             num6 = int(form.cleaned_data.get(f"num6"))
             pro = lotto[num1]*lotto[num2]*lotto[num3]*lotto[num4]*lotto[num5]*lotto[num6]
-            expected = 1000*(int(1000*(1/pro))//1000)
+            expected = 1000*(int(1000*(1/pro))//1000)*40
             return render(request,"galleries/gallery_list.html", context={
                 'form':form, 
                 "container":container, 
@@ -110,6 +117,29 @@ class InputLottery(View):
     def get(self, request):
         form = forms.InputForm()
         return render(request,"galleries/gallery_list.html", context={'form':form, "done":False})
+
+
+def all_numbers(request):
+
+    page = request.GET.get("page", 1)
+    page = int(page or 1)
+    global cbox
+    print(len(cbox))
+    I = InputLottery()
+    I.exe()
+    size = 30
+    limit = page*size
+    offset = limit - size
+    subset = cbox[offset:limit]
+    until_bonus = 0
+
+    page_count = ceil(len(cbox)//size)
+    return render(request, "galleries/list.html", context={
+        "page":page,
+        "page_count":page_count,
+        "subset":subset,
+        "var":until_bonus,
+    })
 
 
 class LoginView(FormView):

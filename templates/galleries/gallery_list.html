@@ -85,7 +85,11 @@
         <div class="bottombox">
             {% if user.is_authenticated %}
                 {% if done is True %}
-                    <h3> <span style="color:coral">{{expected}} won is expected to win the lottery</span></h1>
+                    <div class="authbox"><h3> <span style="color:coral">{{expected}} won is expected to win the lottery</span></h1></div>
+                    
+                    <div class="authbox" id="more">
+                        <a href="{% url "home:list" %}"><span>See lists of last numbers</span></a>
+                    </div>
                 {% endif %}
             {% endif %}
         </div>

@@ -1,0 +1,34 @@
+{% extends "galleries/base.html" %}
+
+{% block content %}
+    <div class="list_cont">
+        
+
+    </div>
+    {% for c in subset %}
+        <div class="list">
+            {% for num in c %}
+                {% if forloop.counter0 < 6 %}
+                    <div id="ball_"class="blue_">{{num}}</div>
+                {% elif forloop.counter0 == 6 %}
+                    <div id="ball_"class="red_">{{num}}</div>
+                {% else %}
+                    <div id="ball_"><span style="color:rgb(76, 0, 255); font-weight:bold;">{{num}}</span></div>
+                {% endif %}
+
+            {% endfor %}
+        </div>    
+    {% endfor %}
+        <div class="bottom_list">
+            {% if page != 1 %}
+                <a href="/list/?page={{page|add:-1}}"><span class="bottom_span">prev</span></a>
+            {% endif %}
+            <a href="{% url "home:gallery" %}">home</a>
+            {% if page != page_count %}
+                <a href="/list/?page={{page|add:1}}"><span class="buttom_span">next</span></a>
+            {% endif %}
+        </div>
+    
+    
+    
+{% endblock %}
